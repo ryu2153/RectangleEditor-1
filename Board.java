@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 public class Board {
 
@@ -14,10 +13,15 @@ public class Board {
     }
 
     public void remove(int index){
-       rectangles.remove(index); 
+        try {
+           rectangles.remove(index); 
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("thre's not such a number of rectangle!(｡>﹏<｡)");
+        } finally {
+        }
     } 
 
-    public List<Rectangle> getRectangleInBoard(){
+    public List<Rectangle> getRectangles(){
         return rectangles;
     }
 

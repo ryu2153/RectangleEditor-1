@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 public class Command {
 
@@ -20,8 +19,8 @@ public class Command {
        board.remove(index); 
     }
     
-    public List<Rectangle> getRectangleInBoard(){
-        return board.getRectangleInBoard();
+    public List<Rectangle> getRectangles(){
+        return board.getRectangles();
     }
 
 }

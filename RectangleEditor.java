@@ -17,9 +17,9 @@ public class RectangleEditor{
 
         while(!isEnd){
 
-            hi();
-
             displayAll();
+
+            hi();
             
             System.out.println("Command->");
             String str = br.readLine(); 
@@ -27,43 +27,71 @@ public class RectangleEditor{
             switch (str){ 
 
                 case "create":
-                System.out.println("width->");
-                str = br.readLine(); 
-                int width = Integer.parseInt(str);
-                System.out.println("height->");
-                str = br.readLine(); 
-                int height = Integer.parseInt(str);
-                System.out.println("x->");
-                str = br.readLine(); 
-                int x = Integer.parseInt(str);
-                System.out.println("y->");
-                str = br.readLine(); 
-                int y = Integer.parseInt(str);
-                command.create(width,height,x,y); 
-                break;
+                    int width = readLine("width->");
+                    int height = readLine("height->");
+                    int x = readLine("x->");
+                    int y = readLine("y->");
+                    command.create(width,height,x,y); 
+                    break;
 
                 case "delete":
-                System.out.println("index->");
-                str = br.readLine(); 
-                int index = Integer.parseInt(str);
-                command.delete(index); 
-                break;
+                    int index = readLine("index->");
+                    command.delete(index); 
+                    break;
 
                 case "exit":
-                isEnd = true;
-                break;
+                    isEnd = true;
+                    break;
 
                 default:
-                System.out.println("wrong command!(｡>﹏<｡)");
-                break;
+                    System.out.println("wrong command!(｡>﹏<｡)");
+                    break;
 
             }
         }
     }
 
+    public static int readLine(String str) {
+
+        System.out.println(str);
+
+        InputStreamReader is = new InputStreamReader(System.in); 
+        BufferedReader br = new BufferedReader(is); 
+
+        int index = -1;
+
+        while (true){
+
+            String input_str = "";
+
+            try {
+                input_str = br.readLine(); 
+            } catch (IOException e){
+                System.out.println( "keybord is perhaps broken!(｡>﹏<｡)" );
+            }
+
+            if(input_str!=""){
+
+                try {
+                    index = Integer.parseInt(input_str);
+
+                } catch (NumberFormatException e) {
+                    System.out.println("wrong input! please input again.(｡>﹏<｡)");
+                    System.out.println(str);
+                    
+                }
+
+                if(index!=-1){
+                    return index;
+                }
+
+                input_str = "";
+
+            }
+        }
+    }
 
     public static void hi(){
-        System.out.println("----おしながき(*´∀｀*)----");
         System.out.println("- create");
         System.out.println("- delete");
         System.out.println("- exit");
@@ -71,13 +99,12 @@ public class RectangleEditor{
 
     public static void displayAll(){
         List<Rectangle> rectangles = new ArrayList<Rectangle>();
-        rectangles = command.getRectangleInBoard();
+        rectangles = command.getRectangles();
 
         ListIterator<Rectangle> it = rectangles.listIterator();
 
         while(it.hasNext()){
-            System.out.println("----シカクいちらん(*´∀｀*)----");
-            System.out.println("[" + it.nextIndex() + "]"+ it.next().getRectangle());
+            System.out.println("[" + it.nextIndex() + "]"+ it.next().showRectangle());
         }
     }
 

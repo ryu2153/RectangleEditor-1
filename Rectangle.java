@@ -12,7 +12,7 @@ public class Rectangle {
         this.y = y;
     }
 
-    public String getRectangle(){
+    public String showRectangle(){
         return "[width:"+this.width+",heghit:"+this.height+",x:"+this.x+",y:"+this.y+"]";
     }
 
